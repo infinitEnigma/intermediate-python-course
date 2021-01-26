@@ -4,8 +4,8 @@ from random import randint
 
 # instagram variables
 loginButton = '#loginForm > div > div:nth-child(3)'
-rememberPass = '//*[@id="react-root"]/section/main/div/div/div/div/button'
-toggleNotifications = '/html/body/div[4]/div/div/div/div[3]/button[2]'
+dontRememberPass = '//*[@id="react-root"]/section/main/div/div/div/div/button'
+noNotifications = '/html/body/div[4]/div/div/div/div[3]/button[2]'
 firstPost = '//*[@id="react-root"]/section/main/div/div[1]/div/div[1]/div[2]/div/a/div/div[2]'
 followButton = '/html/body/div[5]/div[2]/div/article/header/div[2]/div[1]/div[2]/button'
 likeButton = '/html/body/div[5]/div[2]/div/article/div[3]/section[1]/span[1]/button/div/span'
@@ -37,11 +37,11 @@ sleep(0.5)
 lbutton = chromewebdriver.find_element_by_css_selector(loginButton)
 lbutton.click()
 sleep(3)
-notnow1 = chromewebdriver.find_element_by_xpath(rememberPass)
-notnow1.click()
+notnow = chromewebdriver.find_element_by_xpath(dontRememberPass)
+notnow.click()
 sleep(3)
-notnow2 = chromewebdriver.find_element_by_xpath(toggleNotifications)
-notnow2.click()
+notnow = chromewebdriver.find_element_by_xpath(noNotifications)
+notnow.click()
 sleep(randint(5,10))
 
 # logged in, go to instagram's explore page
