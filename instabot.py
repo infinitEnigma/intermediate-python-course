@@ -1,0 +1,46 @@
+from selenium import webdriver
+from time import sleep
+from random import randint
+
+chromewebdriver = webdriver.Chrome()
+chromewebdriver.get('https://instagram.com')
+sleep(randint(5,10))
+
+username = chromewebdriver.find_element_by_name('username')
+password = chromewebdriver.find_element_by_name('password')
+user = input('unesi svoj Instagram username')
+passw = input('unesi svoj Instagram password')
+username.send_keys(user)
+sleep(1)
+password.send_keys(passw)
+sleep(0.5)
+lbutton = chromewebdriver.find_element_by_css_selector('#loginForm > div > div:nth-child(3)')
+lbutton.click()
+sleep(3)
+notnow1 = chromewebdriver.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div/div/div/button')
+notnow1.click()
+sleep(3)
+notnow2 = chromewebdriver.find_element_by_xpath('/html/body/div[4]/div/div/div/div[3]/button[2]')
+notnow2.click()
+sleep(randint(5,10))
+chromewebdriver.get('https://instagram.com/explore/')
+sleep(randint(5,10))
+post = chromewebdriver.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div[1]/div/div[1]/div[2]/div/a/div/div[2]')
+post.click()
+sleep(randint(1,3))
+commentList = ['Awesome post `(super post - testiranje bota u toku, sorry :tada:)`', 'Great post `(super post - testiranje bota u toku, sorry :tada:)`', 'I really like your post `(super post - testiranje bota u toku, sorry :tada:)`', 'The best post today `(super post - testiranje bota u toku, sorry :tada:)`']
+for item in range(1,100):
+    sleep(randint(3,7))
+    if chromewebdriver.find_element_by_xpath('/html/body/div[5]/div[2]/div/article/header/div[2]/div[1]/div[2]/button').text == 'Follow':
+        chromewebdriver.find_element_by_xpath('/html/body/div[5]/div[2]/div/article/header/div[2]/div[1]/div[2]/button').click()
+        sleep(randint(1,4))
+        chromewebdriver.find_element_by_xpath('/html/body/div[5]/div[2]/div/article/div[3]/section[1]/span[1]/button/div/span').click()
+        sleep(randint(2,5))
+        chromewebdriver.find_element_by_xpath('/html/body/div[5]/div[2]/div/article/div[3]/section[1]/span[2]/button/div').click()
+        sleep(randint(1,3))
+        commentbox = chromewebdriver.find_element_by_xpath('/html/body/div[5]/div[2]/div/article/div[3]/section[3]/div/form/textarea')
+        commentbox.click()
+        commentbox.send_keys(commentList[randint(0,3)])
+        sleep(randint(1,3))
+        chromewebdriver.find_element_by_xpath('/html/body/div[5]/div[2]/div/article/div[3]/section[3]/div//form/button').click()
+    chromewebdriver.find_element_by_link_text('Next').click()
