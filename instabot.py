@@ -1,8 +1,8 @@
 from selenium import webdriver
 from time import sleep
 from random import randint
-import insta_vars 
-import sys
+from insta_actions import FollowLikePost
+import sys, insta_vars
 
 
 
@@ -35,60 +35,11 @@ sleep(randint(5,10))
 
 # logged in, define your actions
 print("do you want random search or specific person?")
-action = input("enter 'r' for random or specific name that you want to search for or 'q' for quit: ")
+action = input("enter 'r' for random or specific name that you want to search for, or 'q' to quit: ")
 if action == 'q': sys.exit("goodbye")
 
-
-
-# define the loop for following, liking and posting - change to fit your needs
-def FollowLikePost(who):
-    if who == 'r':
-        chromewebdriver.get('https://instagram.com/explore/')
-        sleep(randint(5,10))
-        # take the first post
-        post = chromewebdriver.find_element_by_xpath(insta_vars.firstPost)
-        post.click()
-        sleep(randint(1,3))
-    else:
-        # find instagram users and like all their posts
-        searchbox = chromewebdriver.find_element_by_xpath(insta_vars.searchBox)
-        searchbox.focus = True
-        searchbox.send_keys(who)
-        sleep(2)
-        chromewebdriver.find_element_by_xpath(insta_vars.firstResult).click()
-        sleep(10)
-        chromewebdriver.find_element_by_css_selector(insta_vars.firstResultsPost).click()
-        sleep(5)
-    while True:
-        for item in range(1,10):
-            sleep(randint(3,7))
-            
-            if chromewebdriver.find_element_by_xpath(insta_vars.followButton).text == 'Follow':
-                chromewebdriver.find_element_by_xpath(insta_vars.followButton).click()
-                sleep(randint(1,4))
-                chromewebdriver.find_element_by_xpath(insta_vars.likeButton).click()
-                sleep(randint(2,5))
-                chromewebdriver.find_element_by_xpath(insta_vars.commentButton).click()
-                sleep(randint(1,3))
-                commentbox = chromewebdriver.find_element_by_xpath(insta_vars.commentTextArea)
-                commentbox.click()
-                commentbox.send_keys(insta_vars.commentList[randint(0,3)])
-                sleep(randint(5,8))
-                chromewebdriver.find_element_by_xpath(insta_vars.submitButton).click()
-                sleep(randint(1,3))
-            # go to the next post
-            try:
-                chromewebdriver.find_element_by_link_text('Next').click()
-            except:
-                action = input("enter 'r' for random or specific name that you want to search for or 'q' for quit: ")
-                if action == 'q': sys.exit("goodbye")
-                else: FollowLikePost(action)
-        sleep(10000)
-
-
-
 #start the infinite loop
-FollowLikePost(action)
+FollowLikePost(action, chromewebdriver)
     
     
 
