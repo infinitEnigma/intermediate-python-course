@@ -1,9 +1,13 @@
+""" Module for liking, posting and following """
+import sys
 from time import sleep
 from random import randint
-import insta_vars, sys
+import insta_vars
 
-# define the loop for following, liking and posting - change to fit your needs
-def FollowLikePost(who, chromewebdriver):
+
+def follow_like_post(who, chromewebdriver):
+    """ function that defines the loop for following,
+    liking and posting - change to fit your needs """
     if who == 'r':
         chromewebdriver.get('https://instagram.com/explore/')
         sleep(randint(5,10))
@@ -22,7 +26,7 @@ def FollowLikePost(who, chromewebdriver):
         chromewebdriver.find_element_by_css_selector(insta_vars.firstResultsPost).click()
         sleep(5)
     while True:
-        for item in range(1,10):
+        for i in range(1,10):
             sleep(randint(3,7))
             followbutton = chromewebdriver.find_element_by_xpath(insta_vars.followButton)
             if followbutton.text == 'Follow':
@@ -43,7 +47,9 @@ def FollowLikePost(who, chromewebdriver):
                 chromewebdriver.find_element_by_link_text('Next').click()
             except:
                 print("no more posts by these criteria for: ", who)
-                action = input("enter 'r' for random or specific name that you want to search for, or 'q' to quit: ")
-                if action == 'q': sys.exit("goodbye")
-                else: FollowLikePost(action, chromewebdriver)
+                print("enter 'r' for random or specific name that you want to search for, ")
+                action = input("or 'q' to quit: ")
+                if action == 'q':
+                    sys.exit("goodbye")
+                else: follow_like_post(action, chromewebdriver)
         sleep(randint(100,10000))

@@ -1,15 +1,16 @@
-from selenium import webdriver
+""" connect to instagram and start actions """
+import sys
 from time import sleep
 from random import randint
+from selenium import webdriver
+import insta_vars
 from insta_actions import FollowLikePost
-import sys, insta_vars
-
-
 
 # open chrome
 chromewebdriver = webdriver.Chrome()
 chromewebdriver.get('https://instagram.com')
-sleep(randint(5,10)) # sleep while the page loads - change according to your internet speed !!!
+# sleep while the page loads - change according to your internet speed !!!
+sleep(randint(5,10))
 
 username = chromewebdriver.find_element_by_name('username')
 password = chromewebdriver.find_element_by_name('password')
@@ -35,11 +36,10 @@ sleep(randint(5,10))
 
 # logged in, define your actions
 print("do you want random search or specific person?")
-action = input("enter 'r' for random or specific name that you want to search for, or 'q' to quit: ")
-if action == 'q': sys.exit("goodbye")
+print("enter 'r' for random or specific name that you want to search for, ")
+action = input("or 'q' to quit: ")
+if action == 'q':
+    sys.exit("goodbye")
 
-#start the infinite loop
-FollowLikePost(action, chromewebdriver)
-    
-    
-
+# start the loop
+followLikePost(action, chromewebdriver)
