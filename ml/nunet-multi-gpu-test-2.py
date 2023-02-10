@@ -1,4 +1,5 @@
 import os
+import tensorflow as tf
 from tensorflow import keras
 
 # Prepare a directory to store all the checkpoints.
