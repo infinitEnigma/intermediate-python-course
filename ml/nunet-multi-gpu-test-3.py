@@ -5,11 +5,11 @@ import tensorflow as tf
 import time
 
 # Import MNIST data
-from tensorflow.examples.tutorials.mnist import input_data
-mnist = input_data.read_data_sets("/tmp/data/", one_hot=True)
+import tensorflow_datasets
+mnist = tensorflow_datasets.load('mnist')
 
 # Parameters
-num_gpus = 2
+num_gpus = 3
 num_steps = 200
 learning_rate = 0.001
 batch_size = 1024
